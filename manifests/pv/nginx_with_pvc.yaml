@@ -1,0 +1,22 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: mypod
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: mypod
+    spec:
+      containers:
+        - name: nginx-with-pvc
+          image: nginx
+          volumeMounts:
+            - mountPath: "/var/www/html"
+              name: mypd
+      volumes:
+        - name: mypd
+          persistentVolumeClaim:
+            claimName: myclaim-1a
